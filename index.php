@@ -33,7 +33,7 @@ switch($message) {
 function sendMessage($chatId, $response) {
     $url = $GLOBALS['website'].'/sendMessage?chat_id='.$chatId.'&parse_mode=HTML&text='.urlencode($response);
     file_get_contents($url);
-}
+};
 function getPc($chatId){
     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
     $url='https://www.europapress.es/rss/rss.aspx';
@@ -42,9 +42,9 @@ function getPc($chatId){
     $json= json_encode($xml);
     $array= json_decode($json , TRUE);
     
-    for($i=0; $i>=10; $i++ ){
+    for($i=0; $i<=10; $i++ ){
         $titulos=$titulos."\n\n".$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
     };
     sendMessage($chatId,$titulos);
-}
+};
 ?>
