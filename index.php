@@ -47,10 +47,10 @@ function getPc($chatId){
         sendMessage($chatId,$titulos);
     };*/
     $url='https://www.freetogame.com/api/games';
-    /*$json= json_encode($url);
-    $array= json_decode($json , TRUE);*/
+    $json= json_encode($url);
+    $array= json_decode($json , TRUE);
     for($i=0; $i<=9; $i++ ){
-        $titulos=$url['id'][$i]['title']; 
+        $titulos=$array['id'][$i]['title']; 
         sendMessage($chatId,$titulos);
     };
 };
