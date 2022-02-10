@@ -17,6 +17,10 @@ switch($message) {
         $response = 'Hola! Soy @alex';
         sendMessage($chatId, $response);
         break;
+    case '/tengo_sed':
+        $response="Pues bebe agua tonto";
+        sendMessage($chatId, $response);
+        break;
     default:
         $response = 'No te he entendido';
         sendMessage($chatId, $response);
