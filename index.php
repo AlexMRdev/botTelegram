@@ -35,7 +35,6 @@ function sendMessage($chatId, $response) {
     file_get_contents($url);
 }
 function getPc($chatId){
-    include('https://www.freetogame.com/api/games');
     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
     $url='https://www.europapress.es/rss/rss.aspx';
     $xmlstring= file_get_contents($url, false, $context);
@@ -44,7 +43,7 @@ function getPc($chatId){
     $array= json_decode($json , TRUE);
     
     for($i=0; $i>=10; $i++ ){
-        $titulos=$titulos."\n\n".$array['chanel']['item'][$i]['title']."<a href='".$array['chanel']['iten'][$i]['link']."'+info</a>"; 
+        $titulos=$titulos."\n\n".$array['channel']['item'][$i]['title']."<a href='".$array['channel']['iten'][$i]['link']."'+info</a>"; 
     };
     sendMessage($chatId,$titulos);
 }
