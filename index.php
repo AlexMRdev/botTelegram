@@ -21,6 +21,9 @@ switch($message) {
         $response="Pues bebe agua tonto";
         sendMessage($chatId, $response);
         break;
+    case '/titulos':
+        getPc($chatId);
+        break;
     default:
         $response = 'No te he entendido';
         sendMessage($chatId, $response);
@@ -30,5 +33,19 @@ switch($message) {
 function sendMessage($chatId, $response) {
     $url = $GLOBALS['website'].'/sendMessage?chat_id='.$chatId.'&parse_mode=HTML&text='.urlencode($response);
     file_get_contents($url);
+}
+function getPc($chatId){
+    include('https://www.freetogame.com/api/games');
+    $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
+    $url='https://www.europapress.es/rss/rss.aspx';
+    $xmlstring= file_get_contents($url, false, $context);
+    $xml =simplexml_load_string($xmlstring, "SimpleXMLElemnt", LIBXML_NOCDATA);
+    $json= json_encode($xml);
+    $array= json_decode($json , TRUE);
+    
+    for($i=0; $i>=10; $i++ ){
+        $titulos=$titulos."\n\n".$array['chanel']['item'][$i]['title']."<a href='".$array['chanel']['iten'][$i]['link']."'+info</a>"; 
+    };
+    sendMessage($chatId,$titulos);
 }
 ?>
