@@ -59,5 +59,5 @@ function buscarNoticia($chatId,$palabra){
     sendMessage($chatId,"Indique la palabra a buscar y le saldran 5 noticias que la contienen");
     // ForceReply('hola');
 
-}
+};
 ?>
