@@ -57,7 +57,7 @@ function buscarNoticia($chatId,$palabra){
     $array= json_decode($json , TRUE);
 
     sendMessage($chatId,"Indique la palabra a buscar y le saldran 5 noticias que la contienen");
-    ForceReply('hola');
+    // ForceReply('hola');
 
 }
 ?>
