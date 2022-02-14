@@ -48,7 +48,7 @@ function getPc($chatId){
     };
     
 };
-function buscarNoticia($chatId,$palabra){
+function buscarNoticia($chatId){
     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
     $url='https://www.europapress.es/rss/rss.aspx';
     $xmlstring= file_get_contents($url, false, $context);
