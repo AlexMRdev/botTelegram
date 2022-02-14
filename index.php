@@ -17,9 +17,9 @@ switch($message) {
         $response = 'Hola! Soy @alex';
         sendMessage($chatId, $response);
         break;
-    // case '/categorias':
-    //     categorias($chatId);
-    //     break;
+    case '/categorias':
+        categorias($chatId);
+        break;
     case '/titulos':
         getPc($chatId);
         break;
@@ -48,22 +48,22 @@ function getPc($chatId){
     };    
 };
 
-// function categorias($chatId){
-//     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
-//     $url='https://www.europapress.es/rss/rss.aspx';
-//     $xmlstring= file_get_contents($url, false, $context);
-//     $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
-//     $json= json_encode($xml);
-//     $array= json_decode($json , TRUE);
+function categorias($chatId){
+    $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
+    $url='https://www.europapress.es/rss/rss.aspx';
+    $xmlstring= file_get_contents($url, false, $context);
+    $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
+    $json= json_encode($xml);
+    $array= json_decode($json , TRUE);
 
     
-//     for($i=0; $i<=9; $i++ ){
-//         $titulos=$array['channel']['item'][$i]['category'];
-//         // $titulos_simple=array_values(array_unique($titulos));
-//         // sendMessage($chatId,$titulos_simple);
-//         sendMessage($chatId,$titulos);
-//     };    
-// };
+    for($i=0; $i<=9; $i++ ){
+        $titulos=$array['channel']['item'][$i]['category'];
+        // $titulos_simple=array_values(array_unique($titulos));
+        // sendMessage($chatId,$titulos_simple);
+        sendMessage($chatId,$titulos);
+    };    
+};
 
 
 
