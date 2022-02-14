@@ -17,9 +17,9 @@ switch($message) {
         $response = 'Hola! Soy @alex';
         sendMessage($chatId, $response);
         break;
-    // case '/noticia':
-    //     buscarNoticia($chatId);
-    //     break;
+    case '/noticia':
+        buscarNoticia($chatId);
+        break;
     case '/titulos':
         getPc($chatId);
         break;
@@ -50,7 +50,7 @@ function getPc($chatId){
 
 
 
-// function buscarNoticia($chatId,$palabra){
+ function buscarNoticia($chatId,$palabra){
 //     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
 //     $url='https://www.europapress.es/rss/rss.aspx';
 //     $xmlstring= file_get_contents($url, false, $context);
@@ -58,8 +58,8 @@ function getPc($chatId){
 //     $json= json_encode($xml);
 //     $array= json_decode($json , TRUE);
 
-//     sendMessage($chatId,"Indique la palabra a buscar y le saldran 5 noticias que la contienen");
+    sendMessage($chatId,"Indique la palabra a buscar y le saldran 5 noticias que la contienen");
 //     // ForceReply('hola');
 
-// };
+ };
 ?>
