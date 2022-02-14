@@ -17,9 +17,8 @@ switch($message) {
         $response = 'Hola! Soy @alex';
         sendMessage($chatId, $response);
         break;
-    case '/tengo_sed':
-        $response="Pues bebe agua tonto";
-        sendMessage($chatId, $response);
+    case '/noticia':
+        buscarNoticia($chatId);
         break;
     case '/titulos':
         getPc($chatId);
@@ -47,13 +46,18 @@ function getPc($chatId){
         $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
         sendMessage($chatId,$titulos);
     };
-    /*$url='https://www.freetogame.com/api/games';
-    $json= json_encode($url);
-    $array= json_decode($json , TRUE);
-    for($i=0; $i<=9; $i++ ){
-        $titulos=$array['id'][$i]['title']; 
-        sendMessage($chatId,$titulos);
-    };*/
+    
 };
+function buscarNoticia($chatId,$palabra){
+    $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
+    $url='https://www.europapress.es/rss/rss.aspx';
+    $xmlstring= file_get_contents($url, false, $context);
+    $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
+    $json= json_encode($xml);
+    $array= json_decode($json , TRUE);
 
+    sendMessage($chatId,"Indique la palabra a buscar y le saldran 5 noticias que la contienen");
+
+
+}
 ?>
