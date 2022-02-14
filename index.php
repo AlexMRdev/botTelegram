@@ -49,12 +49,12 @@ function getPc($chatId){
     
 };
 function buscarNoticia($chatId){
-    // $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
-    // $url='https://www.europapress.es/rss/rss.aspx';
-    // $xmlstring= file_get_contents($url, false, $context);
-    // $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
-    // $json= json_encode($xml);
-    // $array= json_decode($json , TRUE);
+    $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
+    $url='https://www.europapress.es/rss/rss.aspx';
+    $xmlstring= file_get_contents($url, false, $context);
+    $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
+    $json= json_encode($xml);
+    $array= json_decode($json , TRUE);
 
     sendMessage($chatId,"Indique la palabra a buscar y le saldran 5 noticias que la contienen");
 
