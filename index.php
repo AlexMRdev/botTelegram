@@ -17,12 +17,12 @@ switch($message) {
         $response = 'Hola! Soy @alex';
         sendMessage($chatId, $response);
         break;
-    case '/noticia':
-        buscarNoticia($chatId);
-        break;
-    case '/titulos':
-        getPc($chatId);
-        break;
+    // case '/noticia':
+    //     buscarNoticia($chatId);
+    //     break;
+    // case '/titulos':
+    //     getPc($chatId);
+    //     break;
     default:
         $response = 'No te he entendido';
         sendMessage($chatId, $response);
