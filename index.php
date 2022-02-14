@@ -55,11 +55,12 @@ function categorias($chatId){
     $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
     $json= json_encode($xml);
     $array= json_decode($json , TRUE);
+
     
     for($i=0; $i<=9; $i++ ){
         $titulos=$array['channel']['item'][$i]['category'];
-             
-        sendMessage($chatId,$titulos);
+
+        sendMessage($chatId,array_unique($titulos));
     };    
 };
 
