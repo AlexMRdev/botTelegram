@@ -34,25 +34,26 @@ function sendMessage($chatId, $response) {
     $url = $GLOBALS['website'].'/sendMessage?chat_id='.$chatId.'&parse_mode=HTML&text='.urlencode($response);
     file_get_contents($url);
 };
+
 function getPc($chatId){
     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
-    /*$url='https://www.europapress.es/rss/rss.aspx';
+    $url='https://www.europapress.es/rss/rss.aspx';
     $xmlstring= file_get_contents($url, false, $context);
     $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
     $json= json_encode($xml);
-    $array= json_decode($json , TRUE);*
+    $array= json_decode($json , TRUE);
     
     for($i=0; $i<=9; $i++ ){
         $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
         sendMessage($chatId,$titulos);
-    };*/
-    $url='https://www.freetogame.com/api/games';
+    };
+    /*$url='https://www.freetogame.com/api/games';
     $json= json_encode($url);
     $array= json_decode($json , TRUE);
     for($i=0; $i<=9; $i++ ){
         $titulos=$array['id'][$i]['title']; 
         sendMessage($chatId,$titulos);
-    };
+    };*/
 };
 
 ?>
