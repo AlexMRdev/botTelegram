@@ -62,8 +62,8 @@ function categorias($chatId){
         $titulos=$array['channel']['item'][$i]['category'];
         // $titulos_simple=array_values(array_unique($titulos));
         // sendMessage($chatId,$titulos_simple);
-        sendMessage($chatId,$titulos);
     };
+    sendMessage($chatId,$titulos);
         // $titulos_simple=array_unique($titulos);
         // sendMessage($chatId,$titulos_simple);    
 };
