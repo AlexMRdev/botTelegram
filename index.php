@@ -7,6 +7,7 @@ $update = json_decode($input, TRUE);
 
 $chatId = $update['message']['chat']['id'];
 $message = $update['message']['text'];
+$reply=$update['mesage']['relpy_to_message']['text'];
 
 switch($message) {
     case '/start':
@@ -17,9 +18,9 @@ switch($message) {
         $response = 'Hola! Soy @alex';
         sendMessage($chatId, $response);
         break;
-    case '/categorias':
-        categorias($chatId);
-        break;
+    // case '/categorias':
+    //     categorias($chatId);
+    //     break;
     case '/titulos':
         getPc($chatId);
         break;
@@ -61,10 +62,10 @@ function categorias($chatId){
         $titulos=$array['channel']['item'][$i]['category'];
         // $titulos_simple=array_values(array_unique($titulos));
         // sendMessage($chatId,$titulos_simple);
-        // sendMessage($chatId,$titulos);
+        sendMessage($chatId,$titulos);
     };
-        $titulos_simple=array_unique($titulos);
-        sendMessage($chatId,$titulos_simple);    
+        // $titulos_simple=array_unique($titulos);
+        // sendMessage($chatId,$titulos_simple);    
 };
 
 
