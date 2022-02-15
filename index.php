@@ -51,7 +51,7 @@ function getPc($chatId){
     
     for($i=0; $i<=9; $i++ ){
         $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
-        sendMessage($chatId,$titulos);
+        sendMessage($chatId,$titulos,false);
     };    
 };
 
