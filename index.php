@@ -18,9 +18,9 @@ switch($message) {
         $response = 'Hola! Soy @alex';
         sendMessage($chatId, $response,TRUE);
         break;
-    // case '/categorias':
-    //     categorias($chatId,true);
-    //     break;
+    case '/categorias':
+        categorias($chatId,true);
+        break;
     case '/titulos':
         getPc($chatId);
         break;
