@@ -12,15 +12,18 @@ $reply=$update['mesage']['relpy_to_message']['text'];
 switch($message) {
     case '/start':
         $response = 'Me has iniciado';
-        sendMessage($chatId, $response,TRUE);
+        sendMessage($chatId, $response,false);
         break;
     case '/info':
         $response = 'Hola! Soy @alex';
-        sendMessage($chatId, $response,TRUE);
+        sendMessage($chatId, $response,false);
         break;
     case '/categorias':
         categorias($chatId,true);
         break;
+        case '/nacional':
+            nacional($chatId,false);
+            break;
     case '/titulos':
         getPc($chatId);
         break;
