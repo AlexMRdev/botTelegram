@@ -21,12 +21,15 @@ switch($message) {
     case '/categorias':
         categorias($chatId,true);
         break;
-        case '/nacional':
-            nacional($chatId,false);
-            break;
-            case '/internacional':
-                internacional($chatId,false);
-                break;
+    case '/nacional':
+        nacional($chatId,false);
+        break;
+    case '/economia':
+        economia($chatId,false);
+        break;
+    case '/internacional':
+        internacional($chatId,false);
+        break;
     case '/titulos':
         getPc($chatId);
         break;
@@ -104,6 +107,19 @@ function nacional($chatId){
 function internacional($chatId){
     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
     $url='https://www.europapress.es/rss/rss.aspx?ch=00069';
+    $xmlstring= file_get_contents($url, false, $context);
+    $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
+    $json= json_encode($xml);
+    $array= json_decode($json , TRUE);
+    
+    for($i=0; $i<=9; $i++ ){
+        $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
+        sendMessage($chatId,$titulos,false);
+    };   
+}
+function economia($chatId){
+    $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
+    $url='https://www.europapress.es/rss/rss.aspx?ch=00136';
     $xmlstring= file_get_contents($url, false, $context);
     $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
     $json= json_encode($xml);
