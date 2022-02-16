@@ -1,151 +1,208 @@
 <?php
-$token = '5181655141:AAGOwNr1KZEu21rDBxEwuCruSOR2_Dh55gQ';
-$website = 'https://api.telegram.org/bot'.$token;
+// $token = '5181655141:AAGOwNr1KZEu21rDBxEwuCruSOR2_Dh55gQ';
+// $website = 'https://api.telegram.org/bot'.$token;
 
-$input = file_get_contents('php://input');
-$update = json_decode($input, TRUE);
+// $input = file_get_contents('php://input');
+// $update = json_decode($input, TRUE);
 
-$chatId = $update['message']['chat']['id'];
-$message = $update['message']['text'];
-$reply=$update['mesage']['relpy_to_message']['text'];
+// $chatId = $update['message']['chat']['id'];
+// $message = $update['message']['text'];
+// $reply=$update['mesage']['relpy_to_message']['text'];
 
-switch($message) {
-    case '/start':
-        $response = 'Me has iniciado';
-        sendMessage($chatId, $response,false);
-        break;
-    case '/info':
-        $response = 'Hola! Soy @alex';
-        sendMessage($chatId, $response,false);
-        break;
-    case '/categorias':
-        categorias($chatId,true);
-        break;
-    case '/nacional':
-        nacional($chatId,false);
-        break;
-    case '/economia':
-        economia($chatId,false);
-        break;
-    case '/internacional':
-        internacional($chatId,false);
-        break;
-    case '/titulos':
-        getPc($chatId);
-        break;
-    case '/deportes':
-        deportes($chatId);
-        break;
-    default:
-        $response = 'No te he entendido';
-        sendMessage($chatId, $response,TRUE);
-        break;
-};
+// switch($message) {
+//     case '/start':
+//         $response = 'Me has iniciado';
+//         sendMessage($chatId, $response,false);
+//         break;
+//     case '/info':
+//         $response = 'Hola! Soy @alex';
+//         sendMessage($chatId, $response,false);
+//         break;
+//     case '/categorias':
+//         categorias($chatId,true);
+//         break;
+//     case '/nacional':
+//         nacional($chatId,false);
+//         break;
+//     case '/economia':
+//         economia($chatId,false);
+//         break;
+//     case '/internacional':
+//         internacional($chatId,false);
+//         break;
+//     case '/titulos':
+//         getPc($chatId);
+//         break;
+//     case '/deportes':
+//         deportes($chatId);
+//         break;
+//     default:
+//         $response = 'No te he entendido';
+//         sendMessage($chatId, $response,TRUE);
+//         break;
+// };
 
 
-function sendMessage($chatId, $response,$repl) {
-    if ($repl == TRUE){ 
-        $reply_mark = array('force_reply' => True); 
-        $url = $GLOBALS['website'].'/sendMessage?chat_id='.$chatId.'&parse_mode=HTML&reply_markup='.json_encode($reply_mark).'&text='.urlencode($response); 
-    }else{ 
-        $url = $GLOBALS['website'].'/sendMessage?chat_id='.$chatId.'&parse_mode=HTML&text='.urlencode($response); 
-    } 
-    file_get_contents($url);
-};
+// function sendMessage($chatId, $response,$repl) {
+//     if ($repl == TRUE){ 
+//         $reply_mark = array('force_reply' => True); 
+//         $url = $GLOBALS['website'].'/sendMessage?chat_id='.$chatId.'&parse_mode=HTML&reply_markup='.json_encode($reply_mark).'&text='.urlencode($response); 
+//     }else{ 
+//         $url = $GLOBALS['website'].'/sendMessage?chat_id='.$chatId.'&parse_mode=HTML&text='.urlencode($response); 
+//     } 
+//     file_get_contents($url);
+// };
 
-function getPc($chatId){
-    $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
-    $url='https://www.europapress.es/rss/rss.aspx';
-    $xmlstring= file_get_contents($url, false, $context);
-    $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
-    $json= json_encode($xml);
-    $array= json_decode($json , TRUE);
-    
-    for($i=0; $i<=9; $i++ ){
-        $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
-        sendMessage($chatId,$titulos,false);
-    };    
-};
-
-function categorias($chatId){
-    $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
-    $url='https://www.europapress.es/rss/rss.aspx';
-    $xmlstring= file_get_contents($url, false, $context);
-    $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
-    $json= json_encode($xml);
-    $array= json_decode($json , TRUE);
-
-    
-    for($i=0; $i<=9; $i++ ){
-        $titulos=$array['channel']['item'][$i]['category'];
-    };
-        sendMessage($chatId,$titulos,TRUE);   
-};
-// function categorias($chatId){
+// function getPc($chatId){
 //     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
-//     $url='https://www.abc.es/rss/feeds/abc_ultima.xml';
+//     $url='https://www.europapress.es/rss/rss.aspx';
 //     $xmlstring= file_get_contents($url, false, $context);
 //     $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
 //     $json= json_encode($xml);
 //     $array= json_decode($json , TRUE);
-//         for($i=0; $i<=9; $i++ ){
-//         $titulos=$array['channel']['item'][$i]['category'];
-//         sendMessage($chatId,$titulos,TRUE);   
-//     }
+    
+//     for($i=0; $i<=9; $i++ ){
+//         $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
+//         sendMessage($chatId,$titulos,false);
+//     };    
 // };
 
-function nacional($chatId){
-    $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
-    $url='https://www.europapress.es/rss/rss.aspx?ch=00066';
-    $xmlstring= file_get_contents($url, false, $context);
-    $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
-    $json= json_encode($xml);
-    $array= json_decode($json , TRUE);
-    
-    for($i=0; $i<=9; $i++ ){
-        $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
-        sendMessage($chatId,$titulos,false);
-    };   
-}
-function internacional($chatId){
-    $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
-    $url='https://www.europapress.es/rss/rss.aspx?ch=00069';
-    $xmlstring= file_get_contents($url, false, $context);
-    $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
-    $json= json_encode($xml);
-    $array= json_decode($json , TRUE);
-    
-    for($i=0; $i<=9; $i++ ){
-        $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
-        sendMessage($chatId,$titulos,false);
-    };   
-}
-function economia($chatId){
-    $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
-    $url='https://www.europapress.es/rss/rss.aspx?ch=00136';
-    $xmlstring= file_get_contents($url, false, $context);
-    $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
-    $json= json_encode($xml);
-    $array= json_decode($json , TRUE);
-    
-    for($i=0; $i<=9; $i++ ){
-        $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
-        sendMessage($chatId,$titulos,false);
-    };   
-}
-function deportes($chatId){
-    $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
-    $url='https://www.europapress.es/rss/rss.aspx?ch=00067';
-    $xmlstring= file_get_contents($url, false, $context);
-    $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
-    $json= json_encode($xml);
-    $array= json_decode($json , TRUE);
-    
-    for($i=0; $i<=9; $i++ ){
-        $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
-        sendMessage($chatId,$titulos,false);
-    };   
-}
+// function categorias($chatId){
+//     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
+//     $url='https://www.europapress.es/rss/rss.aspx';
+//     $xmlstring= file_get_contents($url, false, $context);
+//     $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
+//     $json= json_encode($xml);
+//     $array= json_decode($json , TRUE);
 
+    
+//     for($i=0; $i<=9; $i++ ){
+//         $titulos=$array['channel']['item'][$i]['category'];
+//     };
+//         sendMessage($chatId,$titulos,TRUE);   
+// };
 
+// function nacional($chatId){
+//     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
+//     $url='https://www.europapress.es/rss/rss.aspx?ch=00066';
+//     $xmlstring= file_get_contents($url, false, $context);
+//     $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
+//     $json= json_encode($xml);
+//     $array= json_decode($json , TRUE);
+    
+//     for($i=0; $i<=9; $i++ ){
+//         $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
+//         sendMessage($chatId,$titulos,false);
+//     };   
+// }
+// function internacional($chatId){
+//     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
+//     $url='https://www.europapress.es/rss/rss.aspx?ch=00069';
+//     $xmlstring= file_get_contents($url, false, $context);
+//     $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
+//     $json= json_encode($xml);
+//     $array= json_decode($json , TRUE);
+    
+//     for($i=0; $i<=9; $i++ ){
+//         $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
+//         sendMessage($chatId,$titulos,false);
+//     };   
+// }
+// function economia($chatId){
+//     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
+//     $url='https://www.europapress.es/rss/rss.aspx?ch=00136';
+//     $xmlstring= file_get_contents($url, false, $context);
+//     $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
+//     $json= json_encode($xml);
+//     $array= json_decode($json , TRUE);
+    
+//     for($i=0; $i<=9; $i++ ){
+//         $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
+//         sendMessage($chatId,$titulos,false);
+//     };   
+// }
+// function deportes($chatId){
+//     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
+//     $url='https://www.europapress.es/rss/rss.aspx?ch=00067';
+//     $xmlstring= file_get_contents($url, false, $context);
+//     $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
+//     $json= json_encode($xml);
+//     $array= json_decode($json , TRUE);
+    
+//     for($i=0; $i<=9; $i++ ){
+//         $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
+//         sendMessage($chatId,$titulos,false);
+//     };   
+// }
+
+echo "hola"; 
+$token = "5261731576:AAGdSJRelD3k5Hl-Wnkudj1lPdm3W1mVSa4"; 
+$website = 'https://api.telegram.org/bot'.$token; 
+ 
+$input = file_get_contents('php://input'); 
+$update = json_decode($input, TRUE); 
+ 
+$chatId = $update['message']['chat']['id']; 
+$message = $update['message']['text']; 
+$reply=$update["message"]["reply_to_message"]["text"]; 
+ 
+switch($message) { 
+    case '/start': 
+        $response = 'Me has iniciado'; 
+        sendMessage($chatId, $response); 
+        break; 
+    case '/info': 
+        $response = 'Hola! Soy @Botnoticiero'; 
+        sendMessage($chatId, $response); 
+        break; 
+    case '/noticias': 
+        mostrarnoticias($chatId); 
+        break; 
+    case '/categoria': 
+        $response='Las noticias de su categoria'; 
+        elegircategoria($chatId,$response,TRUE); 
+        echo "timidin"; 
+        break; 
+    default: 
+        $response = 'No te he entendido'; 
+        sendMessage($chatId, $response); 
+        break; 
+} 
+ 
+function sendMessage($chatId, $response,$repl) { 
+    if ($repl == TRUE){  
+        $reply_mark = array('force_reply' => True);  
+        $url = $GLOBALS['website'].'/sendMessage?chat_id='.$chatId.'&parse_mode=HTML&reply_markup='.json_encode($reply_mark).'&text='.urlencode($response);  
+   }else{  
+        $url = $GLOBALS['website'].'/sendMessage?chat_id='.$chatId.'&parse_mode=HTML&text='.urlencode($response);  
+    }  
+    file_get_contents($url); 
+} 
+function mostrarnoticias($chatId){ 
+    $context=stream_context_create(array('http'=>array('header'=>'Accept:application/xml'))); 
+    $url="https://www.elperiodico.com/es/rss/rss_portada.xml"; 
+    $xmlstring=file_get_contents($url,false,$context); 
+    $xml=simplexml_load_string($xmlstring,"SimpleXMLElement",LIBXML_NOCDATA); 
+    $json=json_encode($xml); 
+    $array=json_decode($json,TRUE);  
+ 
+    for($i=0;$i <9;$i++){ 
+        $titulo=$titulo."\n\n".$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
+    } 
+    sendMessage($chatId,$titulo,TRUE); 
+} 
+function elegircategoria($chatId,$response,$repl){ 
+    echo "timidin"; 
+        $context=stream_context_create(array('http'=>array('header'=>'Accept:application/xml')));  
+        $url = "https://www.elperiodico.com/es/rss/".$response."/rss.xml";  
+        $xmlstring=file_get_contents($url,false,$context); 
+        $xml=simplexml_load_string($xmlstring,"SimpleXMLElement",LIBXML_NOCDARA); 
+        $json=json_encode($xml); 
+        $array=json_decode($json,TRUE); 
+ 
+        for($i=0;$i<9;$i++){ 
+            $categoria=$categoria."\n\n".$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>";; 
+        } 
+         
+        sendMessage($chatId,$categoria,TRUE);  
 ?>
