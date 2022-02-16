@@ -201,8 +201,9 @@ function elegircategoria($chatId,$response,$repl){
         $array=json_decode($json,TRUE); 
  
         for($i=0;$i<9;$i++){ 
-            $categoria=$categoria."\n\n".$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>";; 
+            $categoria=$categoria."\n\n".$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
         } 
          
-        sendMessage($chatId,$categoria,TRUE);  
+        sendMessage($chatId,$categoria,TRUE);
+    }  
 ?>
