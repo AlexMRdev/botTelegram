@@ -65,11 +65,9 @@ function categorias($chatId){
 
     
     for($i=0; $i<=9; $i++ ){
-        $titulos=$array['channel']['item'][$i]['category'];
-    };
-    for($i=0; $i<=9; $i++ ){
+        $titulos[$i]=$array['channel']['item'][$i]['category'];
     sendMessage($chatId,$titulos[$i],TRUE);   
-    }
+    };
 };
 // function categorias($chatId){
 //     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
