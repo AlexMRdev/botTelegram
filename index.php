@@ -80,7 +80,7 @@ function categorias($chatId){
         $titulos=$array['channel']['item'][$i]['category'];
         sendMessage($chatId,$titulos,TRUE);   
     }
-}
+};
 
 
 
