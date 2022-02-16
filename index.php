@@ -19,7 +19,18 @@ switch($message) {
         sendMessage($chatId, $response,false);
         break;
     case '/categorias':
-        categorias($chatId,true);
+         var keyboard = {
+            'inline_keyboard':[
+                [{
+                    'text': 'Youtube',
+                    'url': 'https//youtube.com'
+                },
+                {
+                    'text': 'Google',
+                    'url': 'https//google.com'
+                }]
+            ]
+        }sendbutton($chatId,'Algunos Enlaces',JSON.stringifi($keyboard));
         break;
     case '/nacional':
         nacional($chatId,false);
@@ -42,6 +53,18 @@ switch($message) {
         break;
 };
 
+function sendbutton($chatId, $response,$keyboard) {
+    var data = {
+        method: 'post',
+        payload:{
+            method: 'sendMessage'
+            chat_Id: String($chatId),
+            text: $response,
+            reply_markup: $keyboard
+        }
+    }
+    file_get_contents($url);
+};
 
 function sendMessage($chatId, $response,$repl) {
     if ($repl == TRUE){ 
