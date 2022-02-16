@@ -82,6 +82,20 @@ function categorias($chatId){
 //     }
 // };
 
+function nacional($chatId){
+    $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
+    $url='https://www.europapress.es/rss/rss.aspx?ch=00066';
+    $xmlstring= file_get_contents($url, false, $context);
+    $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
+    $json= json_encode($xml);
+    $array= json_decode($json , TRUE);
+    
+    for($i=0; $i<=9; $i++ ){
+        $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
+        sendMessage($chatId,$titulos,false);
+    };   
+}
+
 
 
 //  function buscarNoticia($chatId,$palabra){
