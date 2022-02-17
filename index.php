@@ -41,11 +41,13 @@ switch($message) {
         internacional($chatId,false);
         break;
     case '/titulos':
-        getPc($chatId);
+        titulos($chatId);
         break;
     case '/deportes':
         deportes($chatId);
         break;
+    case '/mostrar':
+        Mostrarcategorias($chatId,$reply,TRUE);
     default:
         $response = 'No te he entendido';
         sendMessage($chatId, $response,TRUE);
@@ -62,7 +64,7 @@ function sendMessage($chatId, $response,$repl) {
     file_get_contents($url);
 };
 
-function getPc($chatId){
+function titulos($chatId){
     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
     $url='https://www.europapress.es/rss/rss.aspx';
     $xmlstring= file_get_contents($url, false, $context);
@@ -76,20 +78,20 @@ function getPc($chatId){
     };    
 };
 
-// function categorias($chatId){
-//     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
-//     $url='https://www.europapress.es/rss/rss.aspx';
-//     $xmlstring= file_get_contents($url, false, $context);
-//     $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
-//     $json= json_encode($xml);
-//     $array= json_decode($json , TRUE);
+function Mostrarcategorias($chatId,$reply){
+    $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
+    $url='https://www.elperiodico.com/es/rss/'.$reply.'/rss.xml';
+    $xmlstring= file_get_contents($url, false, $context);
+    $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
+    $json= json_encode($xml);
+    $array= json_decode($json , TRUE);
 
     
-//     for($i=0; $i<=9; $i++ ){
-//         $titulos=$array['channel']['item'][$i]['category'];
-//     };
-//         sendMessage($chatId,$titulos,TRUE);   
-// };
+    for($i=0; $i<=4; $i++ ){
+        $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
+        sendMessage($chatId,$titulos,TRUE);   
+    };
+};
 
 function nacional($chatId){
     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
