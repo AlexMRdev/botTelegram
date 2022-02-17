@@ -51,19 +51,6 @@ switch($message) {
         break;
 };
 
-function sendbutton($chatId, $response,$keyboard) {
-    var data = {
-        method: 'post',
-        payload:{
-            method: 'sendMessage'
-            chat_Id: String($chatId),
-            text: $response,
-            reply_markup: $keyboard
-        }
-    }
-    file_get_contents($url);
-};
-
 function sendMessage($chatId, $response,$repl) {
     if ($repl == TRUE){ 
         $reply_mark = array('force_reply' => True); 
@@ -88,20 +75,20 @@ function getPc($chatId){
     };    
 };
 
-function categorias($chatId){
-    $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
-    $url='https://www.europapress.es/rss/rss.aspx';
-    $xmlstring= file_get_contents($url, false, $context);
-    $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
-    $json= json_encode($xml);
-    $array= json_decode($json , TRUE);
+// function categorias($chatId){
+//     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
+//     $url='https://www.europapress.es/rss/rss.aspx';
+//     $xmlstring= file_get_contents($url, false, $context);
+//     $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
+//     $json= json_encode($xml);
+//     $array= json_decode($json , TRUE);
 
     
-    for($i=0; $i<=9; $i++ ){
-        $titulos=$array['channel']['item'][$i]['category'];
-    };
-        sendMessage($chatId,$titulos,TRUE);   
-};
+//     for($i=0; $i<=9; $i++ ){
+//         $titulos=$array['channel']['item'][$i]['category'];
+//     };
+//         sendMessage($chatId,$titulos,TRUE);   
+// };
 
 function nacional($chatId){
     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
