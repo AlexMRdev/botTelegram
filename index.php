@@ -8,6 +8,7 @@ $update = json_decode($input, TRUE);
 $chatId = $update['message']['chat']['id'];
 $message = $update['message']['text'];
 $reply=$update['mesage']['relpy_to_message']['text'];
+if(empty($reply)){
 
 switch($message) {
     case '/start':
@@ -49,13 +50,31 @@ switch($message) {
     case '/mostrar':
         $response='Eliga una de estas categorias: Nacional, Internacional, Economia, Deportes';
         sendMessage($chatId,$response,false);
-        Mostrarcategorias($chatId,$message);
         break;
     default:
         $response = 'No te he entendido';
         sendMessage($chatId, $response,TRUE);
         break;
-};
+    };
+}else{
+    switch($message){
+        case '/nacional 📣':
+            nacional($chatId,false);
+            break;
+        case '/economia 💵':
+            economia($chatId,false);
+            break;
+        case '/internacional 🌎':
+            internacional($chatId,false);
+            break;
+        case '/titulos':
+            titulos($chatId);
+            break;
+        case '/deportes ⚽':
+            deportes($chatId);
+            break;
+    }
+}
 
 function sendMessage($chatId, $response,$repl) {
     if ($repl == TRUE){ 
