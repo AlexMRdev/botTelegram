@@ -26,7 +26,7 @@ switch($message) {
             array('text'=>'/economia','callback_data'=>"3")
         ),
             array(
-                array('text'=>'/deportes','callback_data'=>"4")
+                array('text'=>'⚽/deportes','callback_data'=>"4")
             )), 'one_time_keyboard' => false, 'resize_keyboard' => true
     );
     file_get_contents('https://api.telegram.org/bot5181655141:AAGOwNr1KZEu21rDBxEwuCruSOR2_Dh55gQ/sendMessage?chat_id='.$chatId.'&parse_mode=HTML&reply_markup='.json_encode($keyboard).'&text=Cargando...');
