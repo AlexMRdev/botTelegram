@@ -47,7 +47,8 @@ switch($message) {
         deportes($chatId);
         break;
     case '/mostrar':
-        Mostrarcategorias($chatId,$reply,TRUE);
+        $response='Eliga una de estas categorias: Nacional, Internacional, Economia, Deportes'
+        Mostrarcategorias($chatId,$response,TRUE);
     default:
         $response = 'No te he entendido';
         sendMessage($chatId, $response,TRUE);
@@ -78,9 +79,9 @@ function titulos($chatId){
     };    
 };
 
-function Mostrarcategorias($chatId,$reply){
+function Mostrarcategorias($chatId,$response){
     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
-    $url='https://www.elperiodico.com/es/rss/'.$reply.'/rss.xml';
+    $url='https://www.elperiodico.com/es/rss/'.$response.'/rss.xml';
     $xmlstring= file_get_contents($url, false, $context);
     $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
     $json= json_encode($xml);
