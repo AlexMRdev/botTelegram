@@ -19,18 +19,16 @@ switch($message) {
         sendMessage($chatId, $response,false);
         break;
     case '/categorias':
-         var keyboard = {
-            'inline_keyboard':[
-                [{
-                    'text': 'Youtube',
-                    'url': 'https//youtube.com'
-                },
-                {
-                    'text': 'Google',
-                    'url': 'https//google.com'
-                }]
-            ]
-        }sendbutton($chatId,'Algunos Enlaces',JSON.stringifi($keyboard));
+        $keyboard = array('keyboard' =>
+        array(array(
+            array('text'=>'nacionales','callback_data'=>"1"),
+            array('text'=>'internacionales','callback_data'=>"2")
+        ),
+            array(
+                array('text'=>'start','callback_data'=>"4")
+            )), 'one_time_keyboard' => false, 'resize_keyboard' => true
+    );
+    file_get_contents('https://api.telegram.org/bot5118834329:AAGxvrMT7Yv-Bc2TeaNV4O31ajptfOKVh7I/sendMessage?chat_id='.$chatId.'&parse_mode=HTML&reply_markup='.json_encode($keyboard).'&text=Cargando...');
         break;
     case '/nacional':
         nacional($chatId,false);
