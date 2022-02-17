@@ -21,8 +21,8 @@ switch($message) {
     case '/categorias':
         $keyboard = array('keyboard' =>
         array(array(
-            array('text'=>'/nacionales','callback_data'=>"1"),
-            array('text'=>'/internacionales','callback_data'=>"2"),
+            array('text'=>'/nacional','callback_data'=>"1"),
+            array('text'=>'/internacional','callback_data'=>"2"),
             array('text'=>'/economia','callback_data'=>"3")
         ),
             array(
