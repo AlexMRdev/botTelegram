@@ -80,13 +80,13 @@ function titulos($chatId){
 
 function Mostrarcategorias($chatId,$reply){
     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
-    $url='https://www.elperiodico.com/es/rss/deportes/rss.xml';
+    $url='https://www.elperiodico.com/es/rss/'.$reply.'/rss.xml';
     $xmlstring= file_get_contents($url, false, $context);
     $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
     $json= json_encode($xml);
     $array= json_decode($json , TRUE);
 
-    if($reply==' '){
+    if($reply==''){
         sendMessage($chatId,'Eliga una de estas categorias: Nacional, Internacional, Economia, Deportes ');
     }else{
         for($i=0; $i<=4; $i++ ){
