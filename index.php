@@ -87,7 +87,7 @@ function Mostrarcategorias($chatId,$reply){
     $array= json_decode($json , TRUE);
 
     if($reply==' '){
-        sendMessage($chatId,'Eliga una de estas categorias: Nacional, Internacional, Economia, Deportes ')
+        sendMessage($chatId,'Eliga una de estas categorias: Nacional, Internacional, Economia, Deportes ');
     }else{
         for($i=0; $i<=4; $i++ ){
             $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
