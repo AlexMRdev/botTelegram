@@ -48,7 +48,7 @@ switch($message) {
         break;
     case '/mostrar':
         $response='Eliga una de estas categorias: Nacional, Internacional, Economia, Deportes';
-        Mostrarcategorias($chatId,$response,TRUE);
+        Mostrarcategorias($chatId,$response);
         break;
     default:
         $response = 'No te he entendido';
