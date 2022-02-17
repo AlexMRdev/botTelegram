@@ -48,6 +48,7 @@ switch($message) {
         break;
     case '/mostrar':
         $response='Eliga una de estas categorias: Nacional, Internacional, Economia, Deportes';
+        sendMessage($chatId,$response,false);
         Mostrarcategorias($chatId,$response);
         break;
     default:
