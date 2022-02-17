@@ -7,7 +7,7 @@ $update = json_decode($input, TRUE);
 
 $chatId = $update['message']['chat']['id'];
 $message = $update['message']['text'];
-$reply=$update['mesage']['relpy_to_message']['text'];
+$reply=$update['mesage']['reply_to_message']['text'];
 if(empty($reply)){
 
 switch($message) {
