@@ -86,7 +86,7 @@ function Mostrarcategorias($chatId,$reply){
     $json= json_encode($xml);
     $array= json_decode($json , TRUE);
 
-    if($reply==''){
+    if($reply==' '){
         sendMessage($chatId,'Eliga una de estas categorias: Nacional, Internacional, Economia, Deportes ');
     }else{
         for($i=0; $i<=4; $i++ ){
