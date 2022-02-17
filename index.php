@@ -81,9 +81,9 @@ function titulos($chatId){
     };    
 };
 
-function Mostrarcategorias($chatId,$response){
+function Mostrarcategorias($chatId,$message){
     $context= stream_context_create(array('http'=> array('header'=>'Accept:application/xml')));
-    $url='https://www.elperiodico.com/es/rss/'.$response.'/rss.xml';
+    $url='https://www.elperiodico.com/es/rss/'.$message.'/rss.xml';
     $xmlstring= file_get_contents($url, false, $context);
     $xml =simplexml_load_string($xmlstring, "SimpleXMLElement", LIBXML_NOCDATA);
     $json= json_encode($xml);
