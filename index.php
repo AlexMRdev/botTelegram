@@ -58,19 +58,19 @@ switch($message) {
     };
 }else{
     switch($message){
-        case '/nacional 📣':
+        case 'nacional':
             nacional($chatId,false);
             break;
-        case '/economia 💵':
+        case 'economia':
             economia($chatId,false);
             break;
-        case '/internacional 🌎':
+        case 'internacional':
             internacional($chatId,false);
             break;
         case '/titulos':
             titulos($chatId);
             break;
-        case '/deportes ⚽':
+        case 'deportes':
             deportes($chatId);
             break;
     }
