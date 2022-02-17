@@ -87,14 +87,11 @@ function Mostrarcategorias($chatId,$response){
     $json= json_encode($xml);
     $array= json_decode($json , TRUE);
 
-    if($reply==' '){
-        sendMessage($chatId,'Eliga una de estas categorias: Nacional, Internacional, Economia, Deportes ');
-    }else{
         for($i=0; $i<=4; $i++ ){
             $titulos=$array['channel']['item'][$i]['title']."<a href='".$array['channel']['item'][$i]['link']."'>+info</a>"; 
             sendMessage($chatId,$titulos,TRUE);   
         };
-    }
+    
 };
 
 function nacional($chatId){
