@@ -49,7 +49,7 @@ switch($message) {
         break;
     case '/mostrar':
         $response='Eliga una de estas categorias: Nacional, Internacional, Economia, Deportes';
-        sendMessage($chatId,$response,false);
+        sendMessage($chatId,$response,true);
         break;
     default:
         $response = 'No te he entendido';
